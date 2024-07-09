@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='img_BG.png') }}');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            color: black;
+            margin-top: 0;
+            margin-left: 2px;
+        }
+
+        .myimg {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 25px;
+        }
+
+        .result-box {
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .result-box.disease { background-color: #f39434fa; }
+        .result-box.description { background-color: #268af3; }
+        .result-box.precaution { background-color: #f371f9; }
+        .result-box.medications { background-color: #f8576f; }
+        .result-box.workouts { background-color: #99f741; }
+        .result-box.diets { background-color: #e5e23d; }
+
+        .result-box h5 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .result-box h5::after {
+            content: "";
+            display: block;
+            width: 50%;
+            height: 2px;
+            background: black;
+            margin-top: 5px;
+        }
+
+        .form-control {
+            background: white; /* Make background white */
+        }
+
+        .disclaimer {
+            color: rgb(242, 250, 3);
+            background: rgba(249, 1, 1, 0.771);
+            font-weight: bold;
+            text-align: left;
+            margin-top: 20px;
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Logo at the top-left corner -->
+            <div class="logo">
+                <img class="myimg" src="{{ url_for('static', filename='img.png') }}" alt="">
+            </div>
+
+            <a class="navbar-brand" href="#">Health-Care Center</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/developer">Developer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/symptoms">Symptoms</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main form of page -->
+    <h1 class="mt-4 my-4 text-center text-green">Health Care Center</h1>
+    <div class="container my-4 mt-4" style="background: rgba(131, 217, 223, 0.338); color: rgb(17, 2, 2); border-radius: 15px; padding: 40px;">
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="symptoms">Select Symptoms:</label>
+                <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="type symptoms such as itching, sleeping, aching etc">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-danger btn-lg" style="width: 100%; padding: 14px; margin-bottom: 5px; background-color: #29e11cb5;">Predict</button>
+        </form>
+    </div>
+
+    {% if predicted_disease %}
+    <!-- Results -->
+    <h1 class="text-center my-4 mt-4">Model Results</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="result-box disease">
+                    <h5>Disease</h5>
+                    <p>{{ predicted_disease }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="result-box description">
+                    <h5>Description</h5>
+                    <p>{{ dis_des }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="result-box precaution">
+                    <h5>Precaution</h5>
+                    <ul>
+                        {% for i in my_precautions %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="result-box medications">
+                    <h5>Medications</h5>
+                    <ul>
+                        {% for i in medications %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="result-box workouts">
+                    <h5>Workouts</h5>
+                    <ul>
+                        {% for i in workout %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="result-box diets">
+                    <h5>Diets</h5>
+                    <ul>
+                        {% for i in my_diet %}
+                            <li>{{ i }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+        <p>Disclaimer: The predictions provided on this platform are for demonstration and educational purposes only. They should not be used for making real-life decisions or as a substitute for professional medical advice, diagnosis, or treatment.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
