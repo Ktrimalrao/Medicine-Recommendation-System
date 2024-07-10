@@ -1,15 +1,13 @@
-from flask import Flask, request, render_template, jsonify  # Import jsonify
+from flask import Flask, request, render_template, jsonify 
 import numpy as np
 import pandas as pd
 import pickle
 
-
 # flask app
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
-
-
-# load databasedataset===================================
+# load dataset
 sym_des = pd.read_csv("datasets/symtoms_df.csv")
 precautions = pd.read_csv("datasets/precautions_df.csv")
 workout = pd.read_csv("datasets/workout_df.csv")
@@ -17,15 +15,11 @@ description = pd.read_csv("datasets/description.csv")
 medications = pd.read_csv('datasets/medications.csv')
 diets = pd.read_csv("datasets/diets.csv")
 
-
-# load model===========================================
+# load modelx
 svc = pickle.load(open('models/svc.pkl','rb'))
 
 
-#============================================================
-# custome and helping functions
-#==========================helper funtions================
-def helper(dis):
+def symptoms_details(dis):
     desc = description[description['Disease'] == dis]['Description']
     desc = " ".join([w for w in desc])
 
@@ -47,7 +41,7 @@ symptoms_dict = {'itching': 0, 'skin_rash': 1, 'nodal_skin_eruptions': 2, 'conti
 diseases_list = {15: 'Fungal infection', 4: 'Allergy', 16: 'GERD', 9: 'Chronic cholestasis', 14: 'Drug Reaction', 33: 'Peptic ulcer diseae', 1: 'AIDS', 12: 'Diabetes ', 17: 'Gastroenteritis', 6: 'Bronchial Asthma', 23: 'Hypertension ', 30: 'Migraine', 7: 'Cervical spondylosis', 32: 'Paralysis (brain hemorrhage)', 28: 'Jaundice', 29: 'Malaria', 8: 'Chicken pox', 11: 'Dengue', 37: 'Typhoid', 40: 'hepatitis A', 19: 'Hepatitis B', 20: 'Hepatitis C', 21: 'Hepatitis D', 22: 'Hepatitis E', 3: 'Alcoholic hepatitis', 36: 'Tuberculosis', 10: 'Common Cold', 34: 'Pneumonia', 13: 'Dimorphic hemmorhoids(piles)', 18: 'Heart attack', 39: 'Varicose veins', 26: 'Hypothyroidism', 24: 'Hyperthyroidism', 25: 'Hypoglycemia', 31: 'Osteoarthristis', 5: 'Arthritis', 0: '(vertigo) Paroymsal  Positional Vertigo', 2: 'Acne', 38: 'Urinary tract infection', 35: 'Psoriasis', 27: 'Impetigo'}
 
 # Model Prediction function
-def get_predicted_value(patient_symptoms):
+def get_predicted_symptoms(patient_symptoms):
     input_vector = np.zeros(len(symptoms_dict))
     for item in patient_symptoms:
         input_vector[symptoms_dict[item]] = 1
@@ -75,8 +69,8 @@ def home():
             user_symptoms = [s.strip() for s in symptoms.split(',')]
             # Remove any extra characters, if any
             user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
-            predicted_disease = get_predicted_value(user_symptoms)
-            dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
+            predicted_disease = get_predicted_symptoms(user_symptoms)
+            dis_des, precautions, medications, rec_diet, workout = symptoms_details(predicted_disease)
 
             my_precautions = []
             for i in precautions[0]:
