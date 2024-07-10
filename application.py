@@ -8,12 +8,12 @@ application = Flask(__name__)
 app = application
 
 # load dataset
-sym_des = pd.read_csv("datasets/symtoms_df.csv")
-precautions = pd.read_csv("datasets/precautions_df.csv")
-workout = pd.read_csv("datasets/workout_df.csv")
-description = pd.read_csv("datasets/description.csv")
-medications = pd.read_csv('datasets/medications.csv')
-diets = pd.read_csv("datasets/diets.csv")
+sym_des = pd.read_csv("Datasets/symtoms_df.csv")
+precautions = pd.read_csv("Datasets/precautions_df.csv")
+workout = pd.read_csv("Datasets/workout_df.csv")
+description = pd.read_csv("Datasets/description.csv")
+medications = pd.read_csv('Datasets/medications.csv')
+diets = pd.read_csv("Datasets/diets.csv")
 
 
 # load model===========================================
