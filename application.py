@@ -4,7 +4,8 @@ import pandas as pd
 import pickle
 
 # flask app
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
 # load dataset
 sym_des = pd.read_csv("datasets/symtoms_df.csv")
