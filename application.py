@@ -16,7 +16,7 @@ medications = pd.read_csv('Datasets/medications.csv')
 diets = pd.read_csv("Datasets/diets.csv")
 
 
-# load model===========================================
+# load model
 svc = pickle.load(open('models/svc.pkl','rb'))
 
 
@@ -67,7 +67,7 @@ def home():
         else:
 
             # Split the user's input into a list of symptoms (assuming they are comma-separated)
-            user_symptoms = [s.strip() for s in symptoms.split(',')]
+            user_symptoms = request.form.getlist('symptoms[]')
             # Remove any extra characters, if any
             user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
             predicted_disease = get_predicted_symptoms(user_symptoms)
