@@ -4,6 +4,10 @@ The **Medicine Recommendation System** is an intelligent healthcare application 
 
 ---
 
+![image alt](https://github.com/Ktrimalrao/Medicine-Recommendation-System/blob/e7ddce18213ae2cdd04df44a17228b009c979b5c/Medicine%20recomended%20sys.%20Web%20PAge.jpg)
+
+---
+
 ## Table of Contents
 - [Usage](#usage)
 - [Features](#features)
@@ -23,6 +27,10 @@ The **Medicine Recommendation System** is an intelligent healthcare application 
    - Suggested diets
    - Precautionary measures
    - Suitable workouts
+
+---
+
+![image alt](https://github.com/Ktrimalrao/Medicine-Recommendation-System/blob/e7ddce18213ae2cdd04df44a17228b009c979b5c/Screenshot%202024-12-26%20181003.png)
 
 ---
 
@@ -81,6 +89,10 @@ The dataset includes:
 
 For more details and the source code, visit the project repository.  
 Happy Healthcare! 🩺
+
+---
+
+![image alt](https://github.com/Ktrimalrao/Medicine-Recommendation-System/blob/d0f1df56645755e16223b482c18566d0ff7930dc/Medical%20Recommendation%20System%20Thumbnail.jpg)
 
 ---
 
