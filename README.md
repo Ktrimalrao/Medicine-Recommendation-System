@@ -80,7 +80,7 @@ The dataset includes:
 ---
 
 ### Links
-- GitHub Code: 
+- GitHub Code: https://github.com/Ktrimalrao/Medicine-Recommendation-System
 - Dataset link: https://drive.google.com/drive/folders/1KvjW3k79J0q77o_lQsxd6WluTu84mLmx?usp=sharing
 - LinkedIn link: https://www.linkedin.com/posts/k-trimal-rao-397924253_healthcare-machinelearning-flask-activity-7217209249683165184-DxMP?utm_source=share&utm_medium=member_desktop
 - Azure Deployment: https://symptomsprediction.azurewebsites.net/
